@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PetRescue</string>
+    <string name="Email">Email</string>
+    <string name="Password">Contraseña</string>
+    <string name="create_Account_message">¿Aún no tienes cuenta? Haz clic aquí para registrarse.</string>
+    <string name="button_Login">Ingresar</string>
+</resources>

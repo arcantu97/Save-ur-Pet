@@ -1,0 +1,2 @@
+rootProject.name='PetRescue'
+include ':app'

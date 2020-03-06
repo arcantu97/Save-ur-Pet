@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "307141588505",
+    "firebase_url": "https://petrescue-app.firebaseio.com",
+    "project_id": "petrescue-app",
+    "storage_bucket": "petrescue-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307141588505:android:b93c5d104867cf492cdc88",
+        "android_client_info": {
+          "package_name": "arcan.apps.petrescue"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307141588505-op5gh1slks509efkv1bfa6sgg756c2mh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB09Jw1eVxSwlhXDOIMp_wsVgF4-Xa7nc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307141588505-op5gh1slks509efkv1bfa6sgg756c2mh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
