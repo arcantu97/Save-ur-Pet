@@ -3,5 +3,15 @@
     <string name="Email">Email</string>
     <string name="Password">Contraseña</string>
     <string name="create_Account_message">¿Aún no tienes cuenta? Haz clic aquí para registrarse.</string>
+    <string name="newAccountTitle">Nueva cuenta</string>
     <string name="button_Login">Ingresar</string>
+    <string name="username">Nombre del usuario</string>
+    <string name="password_confirm">Confirmar contraseña</string>
+    <string name="create_account">Crear cuenta</string>
+
+
+    <!-- DB Path -->
+    <string name="userscollection_db">users</string>
+    <string name="Ok_value">Ok</string>
+
 </resources>
