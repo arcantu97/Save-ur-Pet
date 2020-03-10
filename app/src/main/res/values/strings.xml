@@ -13,5 +13,10 @@
     <!-- DB Path -->
     <string name="userscollection_db">users</string>
     <string name="Ok_value">Ok</string>
+    <string name="Password_error_Title">Las contraseñas no coinciden</string>
+    <string name="Password_error_message">Verifica que escribiste bien las contraseñas!</string>
+    <string name="Successful_account_Title">Cuenta creada con éxito!</string>
+    <string name="Successfull_account_Message">Tu cuenta ha sido creada, presiona el botón ok para regresar a la pantalla anterior.</string>
+    <string name="Error_Acount_TItle">Error al crear cuenta</string>
 
 </resources>
