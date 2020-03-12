@@ -33,23 +33,34 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(){
-        val email = emailInput.text.toString()
-        val password = passwordInput.text.toString()
+        val email = emailInputLayout.editText?.text.toString()
+        val password = passwordInputLayout.editText?.text.toString()
+
+        if (!email.isNullOrEmpty() && !password.isNullOrEmpty()){
             firebaseAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this) {
+                .addOnCompleteListener(this) {
                         task ->
-                            if (task.isSuccessful){
-                                val nextActivity = Intent(this, MainActivity::class.java)
-                                startActivity(nextActivity)
-                            }
-                            else {
-                                MaterialAlertDialogBuilder(this)
-                                    .setTitle("Error")
-                                    .setMessage(task.exception?.message)
-                                    .setPositiveButton("Ok", null)
-                                    .show();
-                            }
+                    if (task.isSuccessful){
+                        val nextActivity = Intent(this, MainActivity::class.java)
+                        startActivity(nextActivity)
+                    }
+                    else {
+                        MaterialAlertDialogBuilder(this)
+                            .setTitle(getString(R.string.Error_title))
+                            .setMessage(task.exception?.message)
+                            .setPositiveButton(getString(R.string.Ok_value), null)
+                            .show();
+                    }
+                }
         }
+        else{
+            MaterialAlertDialogBuilder(this)
+                .setTitle(getString(R.string.Error_title))
+                .setMessage(getString(R.string.Error_empty))
+                .setPositiveButton(getString(R.string.Ok_value), null)
+                .show();
+        }
+
     }
 
     private fun registerUser(){

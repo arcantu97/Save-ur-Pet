@@ -1,12 +1,15 @@
 package arcan.apps.petrescue
 
-import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.MenuItem
-import android.view.View
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import arcan.apps.petrescue.models.UserModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
@@ -20,6 +23,7 @@ class NewAccountActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var confirmPassword: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_newaccount)
@@ -28,7 +32,75 @@ class NewAccountActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         createAccountButton.isEnabled = false
         createAccountButton.setOnClickListener { createAccount() }
-        loadInstances()
+        loadInstance()
+    }
+
+    private fun loadInstance() {
+
+        nameInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                usernameInputLayout.error = null
+            }
+        })
+
+        emailInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                emailInputLayout.error = null
+            }
+
+        })
+
+        passwordInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                passwordInputLayout.error = null
+            }
+
+        })
+
+        confirmPasswordInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                confirmPasswordInputLayout.error = null
+                createAccountButton.isEnabled = true
+            }
+
+        })
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -39,31 +111,63 @@ class NewAccountActivity : AppCompatActivity() {
     }
 
     private fun createAccount() {
-        val db = FirebaseFirestore.getInstance()
-        val username = nameInput.text.toString()
-        val email = emailInput.text.toString()
-        val password = passwordInput.text.toString()
-        val confirmPassword = confirmPasswordInput.text.toString()
+        val username = usernameInputLayout.editText?.text.toString()
+        val email = emailInputLayout.editText?.text.toString()
+        val password = passwordInputLayout.editText?.text.toString()
+        val confirmPassword = confirmPasswordInputLayout.editText?.text.toString()
 
-        if (password.equals(confirmPassword)) {
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        val newUser = UserModel.User(username, email)
-                        val dbPath = getString(R.string.userscollection_db)
-                        db.collection(dbPath)
-                            .add(newUser)
-                            .addOnSuccessListener {
-                                accountCreatedAlert()
-                            }
-                            .addOnFailureListener { e ->
-                                errorAccount(e)
-                            }
-                    }
-                }
-        } else {
-            errorPassword()
+        val db = FirebaseFirestore.getInstance()
+        if (username.isEmpty()) {
+            usernameInputLayout.error = getString(R.string.Error_1)
         }
+        if (email.isEmpty()) {
+            emailInputLayout.error = getString(R.string.Error_2)
+        }
+        if (password.isEmpty()) {
+            passwordInputLayout.error = getString(R.string.Error_3)
+        }
+        if (confirmPassword.isEmpty()) {
+            confirmPasswordInputLayout.error = getString(R.string.Error_4)
+        }
+
+        if (username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
+            if (password.equals(confirmPassword)) {
+                firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            val uid = task.result?.user?.uid.toString()
+                            val newUser = UserModel.User(username, email, uid)
+                            val dbPath = getString(R.string.userscollection_db)
+                            db.collection(dbPath)
+                                .add(newUser)
+                                .addOnSuccessListener {
+                                    accountCreatedAlert()
+                                }
+                                .addOnFailureListener { e ->
+                                    errorAccount(e)
+                                }
+                        }
+                    }
+            } else {
+                errorPassword()
+            }
+        }
+        else{
+            errorFields()
+        }
+
+    }
+
+    private fun errorFields() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.Error_missedFields_title))
+            .setMessage(getString(R.string.Error_missedFields_message))
+            .setPositiveButton(getString(R.string.Ok_value), null)
+            .show()
+    }
+
+    private fun isEmpty(editText: EditText): Boolean {
+        return editText.text.toString().trim().isEmpty();
     }
 
     private fun errorPassword() {
@@ -74,27 +178,13 @@ class NewAccountActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun loadInstances() {
-        confirmPasswordInput.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val conf = s.toString()
-                if (conf.isNotEmpty()) {
-                    createAccountButton.isEnabled = true
-                }
-            }
-        })
-    }
-
     private fun accountCreatedAlert() {
         MaterialAlertDialogBuilder(this)
             .setTitle(getString(R.string.Successful_account_Title))
             .setMessage(getString(R.string.Successfull_account_Message))
-            .setPositiveButton(getString(R.string.Ok_value)) {
-                _, _ -> onBackPressed()
+            .setPositiveButton(getString(R.string.Ok_value)) { _, _ ->
+                val nextActivity = Intent(this, LoginActivity::class.java)
+                startActivity(nextActivity)
             }
             .show()
     }

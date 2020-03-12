@@ -16,7 +16,22 @@
     <string name="Password_error_Title">Las contraseñas no coinciden</string>
     <string name="Password_error_message">Verifica que escribiste bien las contraseñas!</string>
     <string name="Successful_account_Title">Cuenta creada con éxito!</string>
-    <string name="Successfull_account_Message">Tu cuenta ha sido creada, presiona el botón ok para regresar a la pantalla anterior.</string>
+    <string name="Successfull_account_Message">Tu cuenta ha sido creada, presiona el botón ok para ingresar a la app.</string>
     <string name="Error_Acount_TItle">Error al crear cuenta</string>
+    <string name="Error_missedFields_message">Rellena los campos faltantes para continuar.</string>
+    <string name="Error_missedFields_title">Campos faltantes!</string>
+    <string name="Error_1">No escribiste el nombre del usuario</string>
+    <string name="Error_2">No escribiste un correo electrónico</string>
+    <string name="Error_3">No escribiste la contraseña</string>
+    <string name="Error_4">No confirmaste la contraseña</string>
+    <string name="Error_title">Error</string>
+    <string name="Error_empty">El correo o la contraseña no fueron introducidos!</string>
+    <string name="adopcion_Title">Adopcion</string>
+    <string name="rescate_Title">Rescate</string>
+    <string name="denuncias_Title">Denuncias</string>
+    <string name="rip_Title">RIP</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
