@@ -4,12 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.MenuItem
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doAfterTextChanged
 import arcan.apps.petrescue.models.UserModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
@@ -19,11 +16,6 @@ import kotlinx.android.synthetic.main.activity_newaccount.*
 class NewAccountActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var username: String
-    private lateinit var email: String
-    private lateinit var password: String
-    private lateinit var confirmPassword: String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_newaccount)
@@ -136,16 +128,21 @@ class NewAccountActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val uid = task.result?.user?.uid.toString()
-                            val newUser = UserModel.User(username, email, uid)
+                            val newUser = UserModel.User(0, username, email, uid)
                             val dbPath = getString(R.string.userscollection_db)
                             db.collection(dbPath)
-                                .add(newUser)
+                                .document(uid)
+                                .set(newUser)
                                 .addOnSuccessListener {
                                     accountCreatedAlert()
                                 }
                                 .addOnFailureListener { e ->
-                                    errorAccount(e)
+                                    errorAccountDB(e)
                                 }
+
+                        }
+                        else{
+                            errorAccount()
                         }
                     }
             } else {
@@ -189,10 +186,17 @@ class NewAccountActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun errorAccount(exception: Exception) {
+    private fun errorAccountDB(exception: Exception) {
         MaterialAlertDialogBuilder(this)
             .setTitle(getString(R.string.Error_Acount_TItle))
             .setMessage(exception.message)
+            .setPositiveButton(getString(R.string.Ok_value), null)
+            .show()
+    }
+    private fun errorAccount() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.Error_Acount_TItle))
+            .setMessage(getString(R.string.Error_account_used))
             .setPositiveButton(getString(R.string.Ok_value), null)
             .show()
     }

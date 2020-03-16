@@ -1,8 +1,10 @@
 package arcan.apps.petrescue
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toolbar
 import androidx.core.view.get
 import arcan.apps.petrescue.fragments.DenunciasFragment
@@ -10,7 +12,9 @@ import arcan.apps.petrescue.fragments.IngresadosFragment
 import arcan.apps.petrescue.fragments.RescatadosFragment
 import arcan.apps.petrescue.fragments.RipFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val bottomNavigation: BottomNavigationView = bottom_navigation
-
 
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){

@@ -6,6 +6,7 @@
     <string name="newAccountTitle">Nueva cuenta</string>
     <string name="button_Login">Ingresar</string>
     <string name="username">Nombre del usuario</string>
+    <string name="petName">Nombre de la mascota</string>
     <string name="password_confirm">Confirmar contraseña</string>
     <string name="create_account">Crear cuenta</string>
 
@@ -33,5 +34,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Error_account_used">La cuenta ya está asignada a otro usuario, por favor intenta con otra cuenta.</string>
+    <string name="ADMIN_Permission">1</string>
+    <string name="take_photo">Tomar fotografía</string>
+    <string name="retake_photo">Tomar otra fotografía</string>
+    <string name="Register_pet">Registar mascota</string>
+    <string name="Image_upload_success">Imagen subida exitosamente!</string>
+    <string name="Image_upload_error">La imagen no pudo ser cargada, intentalo más tarde.</string>
+    <string name="petcollection_db">pets</string>
+    <string name="error_upload_pet">Error al subir el registro</string>
+    <string name="Successful_register_pet_title">Registro éxitoso!</string>
+    <string name="Successful_register_message">El registro se cargó correctamente a la base de datos!</string>
 
 </resources>

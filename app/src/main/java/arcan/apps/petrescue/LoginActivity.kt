@@ -1,22 +1,52 @@
 package arcan.apps.petrescue
 
+import android.Manifest
+import android.app.PendingIntent.getActivity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import arcan.apps.petrescue.models.ManagePermissions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
+import java.security.Permissions
+
 
 class LoginActivity : AppCompatActivity() {
 
+
     private lateinit var firebaseAuth: FirebaseAuth
+    private val PermissionsRequestCode = 123
+    private lateinit var managePermissions: ManagePermissions
+
+
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
         firebaseAuth = FirebaseAuth.getInstance()
+        requestPermissions()
+    }
+
+
+
+    private fun requestPermissions() {
+        val permissionList = listOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.INTERNET
+        )
+
+        managePermissions = ManagePermissions(this, permissionList, PermissionsRequestCode)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            managePermissions.checkPermissions()
+        }
     }
 
     override fun onStart() {
@@ -41,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) {
                         task ->
                     if (task.isSuccessful){
+                        val uid = firebaseAuth.uid
                         val nextActivity = Intent(this, MainActivity::class.java)
                         startActivity(nextActivity)
                     }
