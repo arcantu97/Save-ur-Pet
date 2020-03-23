@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import arcan.apps.petrescue.models.UserModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_newaccount.*
 
@@ -108,7 +109,6 @@ class NewAccountActivity : AppCompatActivity() {
         val password = passwordInputLayout.editText?.text.toString()
         val confirmPassword = confirmPasswordInputLayout.editText?.text.toString()
 
-        val db = FirebaseFirestore.getInstance()
         if (username.isEmpty()) {
             usernameInputLayout.error = getString(R.string.Error_1)
         }
@@ -127,12 +127,13 @@ class NewAccountActivity : AppCompatActivity() {
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+                            val db = FirebaseDatabase.getInstance().reference
                             val uid = task.result?.user?.uid.toString()
                             val newUser = UserModel.User(0, username, email, uid)
                             val dbPath = getString(R.string.userscollection_db)
-                            db.collection(dbPath)
-                                .document(uid)
-                                .set(newUser)
+                            db.child(dbPath)
+                                .child(uid)
+                                .setValue(newUser)
                                 .addOnSuccessListener {
                                     accountCreatedAlert()
                                 }

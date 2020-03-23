@@ -1,5 +1,9 @@
 package arcan.apps.petrescue.models
 
 class UserModel {
-    data class User(val adminPermission: Int, val username: String, val email: String, val uid: String)
+    data class User(
+        var adminPermission: Int,
+        var username: String? = "",
+        var email: String? = "",
+        var uid: String? = "")
 }

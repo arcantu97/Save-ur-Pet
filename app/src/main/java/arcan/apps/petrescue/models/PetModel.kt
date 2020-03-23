@@ -1,5 +1,17 @@
 package arcan.apps.petrescue.models
 
 class PetModel {
-    data class Pet(val petName: String, val petImageURL: String, val Adopted: Boolean, val Rescued: Boolean, val entryDate: String, val deathDate: String)
+    data class Pet(
+        var petName: String? = "",
+        var petImageURL: String? = "",
+        var adoptBy: String? = "",
+        var adoptDate: String? = "",
+        var visitDate: String? = "",
+        var entryDate: MutableMap<String, String>,
+        var deathDate: Long,
+        var adopted: Boolean?,
+        var rescued: Boolean?,
+        var requestAdoption: Boolean?,
+        var requestRescue: Boolean?,
+        var NonRequested: Boolean?)
 }

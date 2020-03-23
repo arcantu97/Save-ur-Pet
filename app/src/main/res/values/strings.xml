@@ -13,6 +13,12 @@
 
     <!-- DB Path -->
     <string name="userscollection_db">users</string>
+    <string name="petcollection_db">pets</string>
+    <string name="petAdopted_db">requestAdoptPet</string>
+    <string name="petRescued_db">requestRescuePet</string>
+    <string name="NonAoR">NonAdoptedORRescued</string>
+
+    <!-- Values -->
     <string name="Ok_value">Ok</string>
     <string name="Password_error_Title">Las contraseñas no coinciden</string>
     <string name="Password_error_message">Verifica que escribiste bien las contraseñas!</string>
@@ -27,6 +33,7 @@
     <string name="Error_4">No confirmaste la contraseña</string>
     <string name="Error_title">Error</string>
     <string name="Error_empty">El correo o la contraseña no fueron introducidos!</string>
+    <string name="home_Title">Inicio</string>
     <string name="adopcion_Title">Adopcion</string>
     <string name="rescate_Title">Rescate</string>
     <string name="denuncias_Title">Denuncias</string>
@@ -35,15 +42,32 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Error_account_used">La cuenta ya está asignada a otro usuario, por favor intenta con otra cuenta.</string>
-    <string name="ADMIN_Permission">1</string>
     <string name="take_photo">Tomar fotografía</string>
     <string name="retake_photo">Tomar otra fotografía</string>
     <string name="Register_pet">Registar mascota</string>
     <string name="Image_upload_success">Imagen subida exitosamente!</string>
     <string name="Image_upload_error">La imagen no pudo ser cargada, intentalo más tarde.</string>
-    <string name="petcollection_db">pets</string>
     <string name="error_upload_pet">Error al subir el registro</string>
     <string name="Successful_register_pet_title">Registro éxitoso!</string>
     <string name="Successful_register_message">El registro se cargó correctamente a la base de datos!</string>
+    <string name="Adoption_title_button">Adoptar</string>
+    <string name="Rescue_title_button">Rescatar</string>
+    <string name="adoptPet_title_header">Proceso de adopción de mascota</string>
+    <string name="adopt_input_name_layout_title">Nombre completo</string>
+    <string name="adopt_input_address_layout_title">Calle, número, colonia</string>
+    <string name="adopt_input_c1_layout_title">Telefono de contacto</string>
+    <string name="adopt_input_c2_layout_title">Telefono de contacto 2</string>
+    <string name="adopt_input_visitDate_layout_title">Día de visita</string>
+    <string name="ref_child_order">deathDate</string>
+    <string name="adopt_pet_title_header">Proceso de adopción de</string>
+    <string name="rescue_pet_title_header">Proceso de rescate de</string>
+    <string name="error_adopt_1">Olvidaste ingresar el nombre del solicitante</string>
+    <string name="error_adopt_2">Olvidaste ingresar la dirección del solicitante</string>
+    <string name="error_adopt_3">Olvidaste ingresar el telefono del solicitante</string>
+    <string name="adopt_date_title_button">Ingresar fecha de visita</string>
+    <string name="pattern_date">dd-MM-yy</string>
+    <string name="db_permission_user">adminPermission</string>
+    <string name="request_state">Tu solicitud está en proceso</string>
+
 
 </resources>

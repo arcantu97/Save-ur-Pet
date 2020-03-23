@@ -41,9 +41,15 @@ dependencies {
     //External packages
     implementation 'com.google.android.material:material:1.1.0'
     //noinspection GradleCompatible
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "androidx.gridlayout:gridlayout:1.0.0"
+    implementation 'com.google.firebase:firebase-core:17.2.3'
     implementation 'com.google.firebase:firebase-analytics:17.2.3'
-    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
     implementation 'com.google.firebase:firebase-firestore:21.4.1'
-    implementation 'com.cloudinary:cloudinary-android:1.26.0'
+    implementation 'com.firebaseui:firebase-ui-firestore:6.2.0'
+    implementation 'com.firebaseui:firebase-ui-database:6.2.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

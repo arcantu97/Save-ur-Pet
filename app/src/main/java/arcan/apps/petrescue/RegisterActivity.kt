@@ -12,29 +12,27 @@ import androidx.appcompat.app.AppCompatActivity
 import arcan.apps.petrescue.models.PetModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ServerValue
 import com.google.firebase.storage.FirebaseStorage
-import com.google.type.Date
 import kotlinx.android.synthetic.main.activity_register.*
 import java.io.ByteArrayOutputStream
 import java.time.Instant
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
+import java.time.Period
+import java.time.temporal.ChronoUnit
 
 
 class RegisterActivity : AppCompatActivity() {
     private val requestCode = 0
     private lateinit var firebaseAuth: FirebaseAuth
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         firebaseAuth = FirebaseAuth.getInstance()
         firstPhoto.setOnClickListener { requestCamera() }
-        newPhoto.setOnClickListener {requestCamera() }
+        newPhoto.setOnClickListener { requestCamera() }
     }
-
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -43,9 +41,8 @@ class RegisterActivity : AppCompatActivity() {
 
         //Get img from camera intent
         val img: Bitmap? = intent?.extras?.get("data") as Bitmap?
-        val petName = petInputLayout.editText?.text.toString()
         img?.let { img ->
-           visibilityItems()
+            visibilityItems()
             imageView.setImageBitmap(img)
             this@RegisterActivity.sendBroadcast(intent)
         }
@@ -53,19 +50,23 @@ class RegisterActivity : AppCompatActivity() {
         savePet.setOnClickListener {
             val storage = FirebaseStorage.getInstance("gs://petrescue-app.appspot.com")
             val storageReference = storage.reference
+            val petName = petInputLayout.editText?.text.toString()
             val petRefImg = storageReference.child("$petName")
             val baos = ByteArrayOutputStream()
             img!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
             val data = baos.toByteArray()
             var uploadTask = petRefImg.putBytes(data)
             uploadTask.addOnFailureListener {
-                Toast.makeText(applicationContext, getString(R.string.Image_upload_success), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.Image_upload_success),
+                    Toast.LENGTH_SHORT
+                ).show()
                 // Handle unsuccessful uploads
             }.addOnSuccessListener {
-                task ->
                 // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-                petRefImg.downloadUrl.addOnSuccessListener {
-                    url -> uploadToDB(url.toString(), petName)
+                petRefImg.downloadUrl.addOnSuccessListener { url ->
+                    uploadToDB(url.toString(), petName)
                 }
 
             }
@@ -76,24 +77,29 @@ class RegisterActivity : AppCompatActivity() {
     private fun uploadToDB(downloadUrl: String, petName: String) {
         val uid = firebaseAuth.uid
         val urlImg = downloadUrl.toString()
-        val db = FirebaseFirestore.getInstance()
-        val dbPath = getString(R.string.petcollection_db)
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
-        val formatted = current.format(formatter)
-
-        val newPet = PetModel.Pet(petName, urlImg, Adopted = false, Rescued = false,
-            entryDate = formatted, deathDate = "")
-        uid?.let {
-            db.collection(dbPath)
-                .document(it)
-                .set(newPet)
-                .addOnSuccessListener {
-                    petRegistered()
-                }
-                .addOnFailureListener { e ->
-                    errorDB(e)
-                }
+        val db = FirebaseDatabase.getInstance().reference
+        val dbPath = "pets"
+        val newPet =
+            PetModel.Pet(
+                petName,
+                urlImg,
+                adoptBy = "",
+                adoptDate = "",
+                visitDate = "",
+                entryDate = ServerValue.TIMESTAMP,
+                deathDate = Instant.now().plus(7, ChronoUnit.DAYS).toEpochMilli(),
+                adopted = false,
+                rescued = false,
+                requestAdoption = false,
+                requestRescue = false,
+                NonRequested = false
+            )
+        if (uid != null) {
+            db.child(dbPath).child(petName).setValue(newPet).addOnSuccessListener {
+                petRegistered()
+            }.addOnFailureListener { e ->
+                errorDB(e)
+            }
         }
     }
 
@@ -117,6 +123,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun visibilityItems() {
+        petInputLayout.visibility = View.VISIBLE
         imageView.visibility = View.VISIBLE
         firstPhoto.visibility = View.INVISIBLE
         newPhoto.visibility = View.VISIBLE
@@ -125,7 +132,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun requestCamera() {
         val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if(callCameraIntent.resolveActivity(packageManager)!=null){
+        if (callCameraIntent.resolveActivity(packageManager) != null) {
             startActivityForResult(callCameraIntent, requestCode)
         }
     }

@@ -2,10 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home_Title" />
+
+    <item
         android:id="@+id/adopcion"
         android:icon="@drawable/ic_adopcion"
-        android:title="@string/adopcion_Title"/>
-
+        android:title="@string/adopcion_Title"
+        />
     <item
         android:id="@+id/rescate"
         android:icon="@drawable/ic_rescatar"
