@@ -7,15 +7,26 @@ public class RescueModel {
     String uidRequest;
     String phoneContact1;
     String phoneContact2;
+    String visitDate;
+    String requestDate;
+    String petName;
+    String petImageURL;
     Boolean requestRescue;
     Boolean Rescued;
 
-    public RescueModel(String personName, String personAddress, String uidRequest, String phoneContact1, String phoneContact2, Boolean requestRescue, Boolean rescued) {
+    public RescueModel() {
+    }
+
+    public RescueModel(String personName, String personAddress, String uidRequest, String phoneContact1, String phoneContact2, String visitDate, String requestDate, String petName, String petImageURL, Boolean requestRescue, Boolean rescued) {
         this.personName = personName;
         this.personAddress = personAddress;
         this.uidRequest = uidRequest;
         this.phoneContact1 = phoneContact1;
         this.phoneContact2 = phoneContact2;
+        this.visitDate = visitDate;
+        this.requestDate = requestDate;
+        this.petName = petName;
+        this.petImageURL = petImageURL;
         this.requestRescue = requestRescue;
         Rescued = rescued;
     }
@@ -58,6 +69,38 @@ public class RescueModel {
 
     public void setPhoneContact2(String phoneContact2) {
         this.phoneContact2 = phoneContact2;
+    }
+
+    public String getVisitDate() {
+        return visitDate;
+    }
+
+    public void setVisitDate(String visitDate) {
+        this.visitDate = visitDate;
+    }
+
+    public String getRequestDate() {
+        return requestDate;
+    }
+
+    public void setRequestDate(String requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    public String getPetName() {
+        return petName;
+    }
+
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
+
+    public String getPetImageURL() {
+        return petImageURL;
+    }
+
+    public void setPetImageURL(String petImageURL) {
+        this.petImageURL = petImageURL;
     }
 
     public Boolean getRequestRescue() {

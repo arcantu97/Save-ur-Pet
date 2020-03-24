@@ -76,7 +76,6 @@ public class IngresadasFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         adminPermission = sharedPref.getLong(getString(R.string.db_permission_user), 0);
     }
@@ -154,6 +153,7 @@ public class IngresadasFragment extends Fragment {
                     public void onFinish() {
                         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
                         db.child(getString(R.string.petcollection_db)).child(model.getPetName()).child("nonRequested").setValue(true);
+                        db.child(getString(R.string.NonAoR)).child(model.getPetName()).setValue(model);
                     }
                 }.start();
 

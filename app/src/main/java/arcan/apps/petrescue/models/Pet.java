@@ -5,7 +5,9 @@ public class Pet {
     private String petName;
     private String petImageURL;
     private String adoptBy;
+    private String rescuedBy;
     private String adoptDate;
+    private String rescueDate;
     private String visitDate;
     private Long entryDate;
     private Long deathDate;
@@ -19,11 +21,13 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(String petName, String petImageURL, String adoptBy, String adoptDate, String visitDate, Long entryDate, Long deathDate, Boolean adopted, Boolean rescued, Boolean requestAdoption, Boolean requestRescue, Boolean NonRequested) {
+    public Pet(String petName, String petImageURL, String adoptBy, String rescuedBy, String adoptDate, String rescueDate, String visitDate, Long entryDate, Long deathDate, Boolean adopted, Boolean rescued, Boolean requestAdoption, Boolean requestRescue, Boolean nonRequested) {
         this.petName = petName;
         this.petImageURL = petImageURL;
         this.adoptBy = adoptBy;
+        this.rescuedBy = rescuedBy;
         this.adoptDate = adoptDate;
+        this.rescueDate = rescueDate;
         this.visitDate = visitDate;
         this.entryDate = entryDate;
         this.deathDate = deathDate;
@@ -31,10 +35,12 @@ public class Pet {
         this.rescued = rescued;
         this.requestAdoption = requestAdoption;
         this.requestRescue = requestRescue;
-        this.NonRequested = NonRequested;
+        NonRequested = nonRequested;
     }
 
-    public String getPetName() { return petName; }
+    public String getPetName() {
+        return petName;
+    }
 
     public void setPetName(String petName) {
         this.petName = petName;
@@ -48,17 +54,45 @@ public class Pet {
         this.petImageURL = petImageURL;
     }
 
-    public String getAdoptBy() { return adoptBy; }
+    public String getAdoptBy() {
+        return adoptBy;
+    }
 
-    public void setAdoptBy(String adoptBy) { this.adoptBy = adoptBy; }
+    public void setAdoptBy(String adoptBy) {
+        this.adoptBy = adoptBy;
+    }
 
-    public String getAdoptDate() { return adoptDate; }
+    public String getRescuedBy() {
+        return rescuedBy;
+    }
 
-    public void setAdoptDate(String adoptDate) { this.adoptDate = adoptDate; }
+    public void setRescuedBy(String rescuedBy) {
+        this.rescuedBy = rescuedBy;
+    }
 
-    public String getVisitDate() { return visitDate; }
+    public String getAdoptDate() {
+        return adoptDate;
+    }
 
-    public void setVisitDate(String visitDate) { this.visitDate = visitDate; }
+    public void setAdoptDate(String adoptDate) {
+        this.adoptDate = adoptDate;
+    }
+
+    public String getRescueDate() {
+        return rescueDate;
+    }
+
+    public void setRescueDate(String rescueDate) {
+        this.rescueDate = rescueDate;
+    }
+
+    public String getVisitDate() {
+        return visitDate;
+    }
+
+    public void setVisitDate(String visitDate) {
+        this.visitDate = visitDate;
+    }
 
     public Long getEntryDate() {
         return entryDate;
@@ -68,9 +102,13 @@ public class Pet {
         this.entryDate = entryDate;
     }
 
-    public Long getDeathDate() { return deathDate; }
+    public Long getDeathDate() {
+        return deathDate;
+    }
 
-    public void setDeathDate(Long deathDate) { this.deathDate = deathDate; }
+    public void setDeathDate(Long deathDate) {
+        this.deathDate = deathDate;
+    }
 
     public Boolean getAdopted() {
         return adopted;
@@ -92,7 +130,9 @@ public class Pet {
         return requestAdoption;
     }
 
-    public void setRequestAdoption(Boolean requestAdoption) { this.requestAdoption = requestAdoption; }
+    public void setRequestAdoption(Boolean requestAdoption) {
+        this.requestAdoption = requestAdoption;
+    }
 
     public Boolean getRequestRescue() {
         return requestRescue;
@@ -102,9 +142,13 @@ public class Pet {
         this.requestRescue = requestRescue;
     }
 
-    public Boolean getNonRequested() { return NonRequested; }
+    public Boolean getNonRequested() {
+        return NonRequested;
+    }
 
-    public void setNonRequested(Boolean nonRequested) { NonRequested = nonRequested; }
+    public void setNonRequested(Boolean nonRequested) {
+        NonRequested = nonRequested;
+    }
 
 
 }

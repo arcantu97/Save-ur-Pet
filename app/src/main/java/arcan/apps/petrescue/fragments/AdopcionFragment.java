@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -75,11 +77,11 @@ public class AdopcionFragment extends Fragment {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_adopcion, container, false);
         ListViewAdmin = rootView.findViewById(R.id.adoptAdmin);
-
         if (adminPermission == 1){
             query = FirebaseDatabase.getInstance()
                     .getReference()
@@ -180,7 +182,7 @@ public class AdopcionFragment extends Fragment {
         SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.pattern_date));
         final String formattedDate = formatter.format(date);
         new MaterialAlertDialogBuilder(getActivity(), R.style.AlertDialogTheme)
-                .setTitle("Aprobación solicitud")
+                .setTitle("Aprobar solicitud")
                 .setMessage("Deseas aprobar la solicitud de " + personName + " para adoptar a " + petName + " ?")
                 .setPositiveButton("Aprobar", new DialogInterface.OnClickListener() {
                     @Override

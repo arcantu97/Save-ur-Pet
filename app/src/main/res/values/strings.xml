@@ -17,6 +17,7 @@
     <string name="petAdopted_db">requestAdoptPet</string>
     <string name="petRescued_db">requestRescuePet</string>
     <string name="NonAoR">NonAdoptedORRescued</string>
+    <string name="complaints_db">Complaints</string>
 
     <!-- Values -->
     <string name="Ok_value">Ok</string>
@@ -68,6 +69,22 @@
     <string name="pattern_date">dd-MM-yy</string>
     <string name="db_permission_user">adminPermission</string>
     <string name="request_state">Tu solicitud está en proceso</string>
+    <string name="denuncias_title">Denuncias</string>
+    <string name="denuncia_subtitle">Tómese este momento para pensar y realizar una denuncia si considera necesario.
+		Las denuncias que son tomadas en cuenta son relacionadas a Pets sin hogar,
+		Pets que distorcionan la paz del ciudadano y/o maltrato/homicidio de Pet(s).</string>
+    <string name="enviar_denuncia_title">Enviar denuncia</string>
+    <string name="rip_message">Descansen en paz todos los Pets que lamentablemente han sido abandonados, secuestrados,extraviados o nacidos sin hogar y no han encontrado uno.
+		Ningun Pet en esta vida merece algo así.
+		Desde el fondo de nuestros corazones… SIEMPRE los recordaremos.
+    </string>
+
+    <string name="logout">Salir</string>
+    <string name="logo">Logo</string>
+    <string name="logout_title_dialog">Cerrar sesión</string>
+    <string name="logout_message">Deseas cerrar sesión?</string>
+    <string name="acept_btn_title">Aceptar</string>
+    <string name="cancel_btn_title">Cancelar</string>
 
 
 </resources>

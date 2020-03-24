@@ -36,7 +36,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="opacityPercent" value="60" />
+                                                <entry key="opacityPercent" value="80" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -47,9 +47,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\arcan\Downloads\App\casa-de-perro.png" />
-                                      <entry key="outputName" value="ic_home" />
-                                      <entry key="themeColor" value="ffffff" />
+                                      <entry key="imageAsset" value="C:\Users\arcan\Downloads\proviciones\navbar1.png" />
+                                      <entry key="outputName" value="ic_nav" />
+                                      <entry key="theme" value="CUSTOM" />
+                                      <entry key="themeColor" value="759cb2" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -166,7 +167,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_not_interested_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_exit_to_app_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -176,8 +177,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_reject" />
-                            <entry key="sourceFile" value="C:\Users\arcan" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_icono" />
+                            <entry key="sourceFile" value="C:\Users\arcan\Downloads\proviciones\icono.svg" />
                           </map>
                         </option>
                       </PersistentState>

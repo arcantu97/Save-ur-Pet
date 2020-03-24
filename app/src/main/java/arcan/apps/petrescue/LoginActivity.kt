@@ -71,7 +71,6 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) {
                         task ->
                     if (task.isSuccessful){
-                        val uid = firebaseAuth.uid
                         val nextActivity = Intent(this, MainActivity::class.java)
                         startActivity(nextActivity)
                     }

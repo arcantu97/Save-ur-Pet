@@ -1,12 +1,17 @@
 package arcan.apps.petrescue
 
+import android.app.PendingIntent.getActivity
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import arcan.apps.petrescue.fragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,11 +28,13 @@ class MainActivity() : AppCompatActivity() {
         retrievePermission();
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        logoutBtn.setOnClickListener {
+            logout()
+        }
         val bottomNavigation: BottomNavigationView = bottom_navigation
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-                    supportActionBar?.title = getString(R.string.home_Title)
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.container, IngresadasFragment())
                     transaction.addToBackStack(null)
@@ -35,7 +42,6 @@ class MainActivity() : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.adopcion -> {
-                    supportActionBar?.title = getString(R.string.adopcion_Title)
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.container, AdopcionFragment())
                     transaction.addToBackStack(null)
@@ -43,7 +49,6 @@ class MainActivity() : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.rescate -> {
-                    supportActionBar?.title = getString(R.string.rescate_Title)
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.container, RescatadasFragment())
                     transaction.addToBackStack(null)
@@ -51,7 +56,6 @@ class MainActivity() : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.denuncias -> {
-                    supportActionBar?.title = getString(R.string.denuncias_Title)
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.container, DenunciasFragment())
                     transaction.addToBackStack(null)
@@ -59,7 +63,6 @@ class MainActivity() : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.rip -> {
-                    supportActionBar?.title = getString(R.string.rip_Title)
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.container, RipFragment())
                     transaction.addToBackStack(null)
@@ -68,8 +71,6 @@ class MainActivity() : AppCompatActivity() {
                 }
 
             }
-
-
             false
         }
 
@@ -101,6 +102,22 @@ class MainActivity() : AppCompatActivity() {
                     }
                 })
         }
+    }
+
+    fun logout() {
+        MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
+            .setTitle(getString(R.string.logout_title_dialog))
+            .setMessage(getString(R.string.logout_message))
+            .setPositiveButton(getString(R.string.acept_btn_title)) { dialog, which ->
+                firebaseAuth?.signOut()
+                val nextActivity = Intent(this, LoginActivity::class.java)
+                nextActivity.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
+                nextActivity.flags = Intent.FLAG_ACTIVITY_NO_HISTORY;
+                startActivity(nextActivity)
+            }
+            .setNegativeButton(
+                getString(R.string.cancel_btn_title)
+            ) { dialog, which -> dialog.dismiss() }.show()
     }
 
 
