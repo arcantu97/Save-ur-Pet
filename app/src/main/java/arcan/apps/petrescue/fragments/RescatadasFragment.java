@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,9 +26,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -38,6 +43,7 @@ import java.util.Date;
 
 import arcan.apps.petrescue.R;
 import arcan.apps.petrescue.models.AdoptModel;
+import arcan.apps.petrescue.models.Pet;
 import arcan.apps.petrescue.models.PetModel;
 import arcan.apps.petrescue.models.RescueModel;
 
@@ -130,7 +136,7 @@ public class RescatadasFragment extends Fragment {
                 Reject.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        rejectRequestPet(model.getPetName(), model.getPersonName());
+                        rejectRequestPet(model);
                     }
                 });
             }
@@ -169,17 +175,17 @@ public class RescatadasFragment extends Fragment {
                 }).show();
     }
 
-    private void rejectRequestPet(final String petName, String personName) {
+    private void rejectRequestPet(final RescueModel model) {
         new MaterialAlertDialogBuilder(getActivity(), R.style.AlertDialogTheme)
                 .setTitle("Rechazar solicitud")
-                .setMessage("Deseas rechazar la solicitud de " + personName + " para adoptar a " + petName + " ?")
+                .setMessage("Deseas rechazar la solicitud de " + model.getPersonName() + " para adoptar a " + model.getPetName() + " ?")
                 .setPositiveButton("Rechazar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                        db.child(getString(R.string.petcollection_db)).child(petName).child("nonRequested").setValue(false);
-                        db.child(getString(R.string.petcollection_db)).child(petName).child("requestRescue").setValue(false);
-                        db.child(getString(R.string.petRescued_db)).child(petName).removeValue();
+                      DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                      deleteNode(model.getPetName());
+                      db.child(getString(R.string.petRescued_db)).child(model.getPetName()).removeValue();
+
                     }
                 })
                 .setNegativeButton("Omitir", new DialogInterface.OnClickListener() {
@@ -188,6 +194,23 @@ public class RescatadasFragment extends Fragment {
                         dialog.dismiss();
                     }
                 }).show();
+    }
+
+    private void deleteNode(final String petName) {
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child(getString(R.string.petcollection_db)).child(petName);
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                Pet pet = dataSnapshot.getValue(Pet.class);
+                db.child(getString(R.string.NonAoR)).child(petName).setValue(pet);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
