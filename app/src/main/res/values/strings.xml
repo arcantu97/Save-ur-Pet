@@ -45,7 +45,7 @@
     <string name="Error_account_used">La cuenta ya está asignada a otro usuario, por favor intenta con otra cuenta.</string>
     <string name="take_photo">Tomar fotografía</string>
     <string name="retake_photo">Tomar otra fotografía</string>
-    <string name="Register_pet">Registar mascota</string>
+    <string name="Register_pet">Registar</string>
     <string name="Image_upload_success">Imagen subida exitosamente!</string>
     <string name="Image_upload_error">La imagen no pudo ser cargada, intentalo más tarde.</string>
     <string name="error_upload_pet">Error al subir el registro</string>
@@ -60,7 +60,7 @@
     <string name="adopt_input_c2_layout_title">Telefono de contacto 2</string>
     <string name="adopt_input_visitDate_layout_title">Día de visita</string>
     <string name="ref_child_order">deathDate</string>
-    <string name="adopt_pet_title_header">Proceso de adopción de</string>
+    <string name="adopt_pet_title_header">Solicitud de adopción de</string>
     <string name="rescue_pet_title_header">Proceso de rescate de</string>
     <string name="error_adopt_1">Olvidaste ingresar el nombre del solicitante</string>
     <string name="error_adopt_2">Olvidaste ingresar la dirección del solicitante</string>
@@ -73,18 +73,25 @@
     <string name="denuncia_subtitle">Tómese este momento para pensar y realizar una denuncia si considera necesario.
 		Las denuncias que son tomadas en cuenta son relacionadas a Pets sin hogar,
 		Pets que distorcionan la paz del ciudadano y/o maltrato/homicidio de Pet(s).</string>
+    <string name="denuncias_title_btn">Registrar denuncia</string>
+    <string name="denuncias_title_box">Escribe tu denuncia</string>
     <string name="enviar_denuncia_title">Enviar denuncia</string>
     <string name="rip_message">Descansen en paz todos los Pets que lamentablemente han sido abandonados, secuestrados,extraviados o nacidos sin hogar y no han encontrado uno.
 		Ningun Pet en esta vida merece algo así.
 		Desde el fondo de nuestros corazones… SIEMPRE los recordaremos.
     </string>
-
+<string name="adopcion_text">Lamentamos tener en custodia a su Pet.
+Solicitamos esta información para comenzar el proceso de rescate lo más pronto posible.
+Tome en cuenta que si el proceso de adopción no es exitoso el Pet será trasladado a la pestaña RIP.
+</string>
     <string name="logout">Salir</string>
     <string name="logo">Logo</string>
     <string name="logout_title_dialog">Cerrar sesión</string>
     <string name="logout_message">Deseas cerrar sesión?</string>
     <string name="acept_btn_title">Aceptar</string>
     <string name="cancel_btn_title">Cancelar</string>
+    <string name="close_title">Cerrar</string>
+    <string name="complaint_title_header">DENUNCIA</string>
 
 
 </resources>

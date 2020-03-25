@@ -18,6 +18,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/adopcion_text"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:justificationMode="inter_word"
+                tools:targetApi="o" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/rescueTitle"
                 android:layout_width="match_parent"

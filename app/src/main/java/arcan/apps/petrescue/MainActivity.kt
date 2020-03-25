@@ -1,11 +1,12 @@
 package arcan.apps.petrescue
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.View
+import android.widget.TextView
 import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -42,6 +43,7 @@ class MainActivity() : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.adopcion -> {
+                    Title.text = "Adopción"
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.container, AdopcionFragment())
                     transaction.addToBackStack(null)
@@ -49,6 +51,7 @@ class MainActivity() : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.rescate -> {
+                    Title.text = "Rescate"
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.container, RescatadasFragment())
                     transaction.addToBackStack(null)
@@ -56,6 +59,7 @@ class MainActivity() : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.denuncias -> {
+                    Title.text = "Denuncias"
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.container, DenunciasFragment())
                     transaction.addToBackStack(null)
@@ -63,6 +67,7 @@ class MainActivity() : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.rip -> {
+                    Title.text = "RIP"
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.container, RipFragment())
                     transaction.addToBackStack(null)

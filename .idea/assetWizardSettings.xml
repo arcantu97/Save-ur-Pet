@@ -47,10 +47,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\arcan\Downloads\proviciones\navbar1.png" />
-                                      <entry key="outputName" value="ic_nav" />
+                                      <entry key="imageAsset" value="C:\Users\arcan\Downloads\App\App\Assets\ic_rip.png" />
+                                      <entry key="outputName" value="ic_rip" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="759cb2" />
+                                      <entry key="themeColor" value="000000" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -178,8 +178,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_icono" />
-                            <entry key="sourceFile" value="C:\Users\arcan\Downloads\proviciones\icono.svg" />
+                            <entry key="outputName" value="ic_login" />
+                            <entry key="sourceFile" value="C:\Users\arcan\Downloads\proviciones\Login.svg" />
                           </map>
                         </option>
                       </PersistentState>

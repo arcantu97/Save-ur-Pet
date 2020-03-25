@@ -64,7 +64,6 @@ public class AdopcionFragment extends Fragment {
     private FirebaseListAdapter<AdoptModel> adapterAdmin;
     Query query;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         retrievePermission();
@@ -80,6 +79,7 @@ public class AdopcionFragment extends Fragment {
 
 
 
+    @SuppressLint("ResourceType")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

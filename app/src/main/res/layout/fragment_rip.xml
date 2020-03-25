@@ -7,12 +7,20 @@
 
     <TextView
         android:id="@+id/message_rip"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:justificationMode="inter_word"
         android:text="@string/rip_message"
-        android:textSize="10sp"
         android:textColor="@color/black"
+        android:textSize="10sp"
         tools:ignore="SmallSp"
         tools:targetApi="o" />
 

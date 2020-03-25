@@ -142,10 +142,11 @@ public class IngresadasFragment extends Fragment {
                 new CountDownTimer(millis, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        @SuppressLint("DefaultLocale") String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
-                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
-                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
-                        holder.timer.setText(hms);
+                        @SuppressLint("DefaultLocale")
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd:HH:mm:ss", Locale.UK);
+                        Date date = new Date(millisUntilFinished);
+                        String result = formatter.format(date);
+                        holder.timer.setText(result);
 
                     }
 
