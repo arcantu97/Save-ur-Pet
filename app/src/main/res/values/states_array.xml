@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="states_array">
+        <item>Seleccionar municipio</item>
+        <item>Apodaca</item>
+        <item>Cadereyta</item>
+        <item>El Carmen</item>
+        <item>García</item>
+        <item>San Pedro Garza García</item>
+        <item>General Escobedo</item>
+        <item>Guadalupe</item>
+        <item>Juárez</item>
+        <item>Monterrey</item>
+        <item>Salinas Victoria</item>
+        <item>San Nicolás</item>
+        <item>Santa Catarina</item>
+        <item>Santiago</item>
+
+    </string-array>
+</resources>

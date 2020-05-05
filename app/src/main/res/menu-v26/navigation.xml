@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home_print"
+        android:title="@string/home_Title" />
+
+    <item
+        android:id="@+id/adopcion"
+        android:icon="@drawable/ic_adopcion"
+        android:title="@string/adopcion_Title"
+        />
+    <item
+        android:id="@+id/rescate"
+        android:icon="@drawable/ic_rescatar"
+        android:title="@string/rescate_Title"/>
+
+    <item
+        android:id="@+id/denuncias"
+        android:icon="@drawable/ic_denuncias"
+        android:title="@string/denuncias_Title"/>
+
+    <item
+        android:id="@+id/rip"
+        android:icon="@drawable/ic_rip"
+        android:iconTint="@color/black"
+        android:title="@string/rip_Title"/>
+
+</menu>

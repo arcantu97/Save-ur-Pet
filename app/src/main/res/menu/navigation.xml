@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_home_print"
         android:title="@string/home_Title" />
 
     <item
@@ -24,6 +25,7 @@
     <item
         android:id="@+id/rip"
         android:icon="@drawable/ic_rip"
-        android:title="@string/rip_Title"/>
+        android:title="@string/rip_Title"
+        tools:targetApi="o" />
 
 </menu>

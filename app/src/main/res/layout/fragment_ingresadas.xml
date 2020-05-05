@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".fragments.IngresadasFragment">
 
+
+    <TextView
+        android:id="@+id/pageTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_page_Title"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"/>
+
+    <Spinner
+        android:id="@+id/SpinnerState"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:entries="@array/states_array"
+        android:layout_below="@+id/pageTitle"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
@@ -25,6 +43,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/petRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/SpinnerState"
+        android:layout_marginTop="15dp" />
 </RelativeLayout>
 

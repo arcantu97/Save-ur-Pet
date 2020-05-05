@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:hint="@string/petName"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,36 +28,22 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="300dp"
-        android:layout_height="350dp"
-        android:visibility="gone"
+        android:layout_width="339dp"
+        android:layout_height="327dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/petInputLayout"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintVertical_bias="0.041" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/firstPhoto"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="360dp"
-        android:text="@string/take_photo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petInputLayout"
-        app:layout_constraintVertical_bias="0.662" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/newPhoto"
-        android:layout_width="wrap_content"
         android:layout_height="42dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/retake_photo"
+        android:layout_marginTop="16dp"
+        android:text="@string/take_photo"
         android:textSize="11sp"
-        android:visibility="gone"
         app:backgroundTint="#00599F"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,15 +51,28 @@
         tools:ignore="MissingConstraints,SmallSp" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/galleryPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginTop="6dp"
+        android:text="@string/gallery_Photo"
+        android:textSize="11sp"
+        app:backgroundTint="#00599F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstPhoto"
+        tools:ignore="MissingConstraints,SmallSp" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/savePet"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_height="42dp"
         android:text="@string/Register_pet"
         app:backgroundTint="#00599F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/galleryPhoto"
         app:layout_constraintVertical_bias="0.109" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

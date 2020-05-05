@@ -18,19 +18,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <TextView
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_login"
                 android:backgroundTint="@color/white"
-                app:layout_constraintStart_toStartOf="parent" />
-
+                android:text="@string/Icon_text"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
             <TextView
                 android:id="@+id/Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Inicio"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/logoutBtn"
@@ -67,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/bottomBar"
-        app:itemIconTint="@color/colorPrimaryDark"
+        app:itemIconTint="@color/black"
         app:itemTextColor="@color/colorPrimaryDark"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"

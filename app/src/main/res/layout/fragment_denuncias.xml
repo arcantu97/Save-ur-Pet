@@ -58,6 +58,13 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Spinner
+                android:id="@+id/SpinnerState"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/contactPhone1InputLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -103,22 +110,41 @@
             android:hint="@string/denuncias_title_box"
             app:errorEnabled="true"
             app:hintAnimationEnabled="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="144"
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="text"
-                android:maxLines="5" />
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:maxLength="144"
+                android:isScrollContainer="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/getImageGallery"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/gallery_Photo" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Send"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/denuncias_title_btn" />
+                android:text="@string/denuncias_title_btn"
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 

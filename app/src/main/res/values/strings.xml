@@ -31,7 +31,9 @@
     <string name="Error_1">No escribiste el nombre del usuario</string>
     <string name="Error_2">No escribiste un correo electrónico</string>
     <string name="Error_3">No escribiste la contraseña</string>
-    <string name="Error_4">No confirmaste la contraseña</string>
+    <string name="Error_4">No escribiste una dirección</string>
+    <string name="Error_5">No escribiste un telefóno</string>
+    <string name="Error_6">No seleccionaste un municipio</string>
     <string name="Error_title">Error</string>
     <string name="Error_empty">El correo o la contraseña no fueron introducidos!</string>
     <string name="home_Title">Inicio</string>
@@ -46,6 +48,7 @@
     <string name="take_photo">Tomar fotografía</string>
     <string name="retake_photo">Tomar otra fotografía</string>
     <string name="Register_pet">Registar</string>
+    <string name="Register_pet_wo">Registar mascota sin imagen</string>
     <string name="Image_upload_success">Imagen subida exitosamente!</string>
     <string name="Image_upload_error">La imagen no pudo ser cargada, intentalo más tarde.</string>
     <string name="error_upload_pet">Error al subir el registro</string>
@@ -68,6 +71,7 @@
     <string name="adopt_date_title_button">Ingresar fecha de visita</string>
     <string name="pattern_date">dd-MM-yy</string>
     <string name="db_permission_user">adminPermission</string>
+
     <string name="request_state">Tu solicitud está en proceso</string>
     <string name="denuncias_title">Denuncias</string>
     <string name="denuncia_subtitle">Tómese este momento para pensar y realizar una denuncia si considera necesario.
@@ -92,6 +96,15 @@ Tome en cuenta que si el proceso de adopción no es exitoso el Pet será traslad
     <string name="cancel_btn_title">Cancelar</string>
     <string name="close_title">Cerrar</string>
     <string name="complaint_title_header">DENUNCIA</string>
+    <string name="address">Dirección</string>
+    <string name="phone1">Telefóno 1</string>
+    <string name="phone2">Telefóno 2</string>
+    <string name="state">Municipio</string>
+    <string name="Icon_text">Save (ur) Pet</string>
+    <string name="main_page_Title">Inicio</string>
+    <string name="gallery_Photo">Escoger una imagen de la galería</string>
+    <string name="pick_image_intent">1</string>
+    <string name="spinner">Seleccionar municipio</string>
 
 
 </resources>
