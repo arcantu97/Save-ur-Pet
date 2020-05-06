@@ -11,13 +11,14 @@ public class RescueModel {
     String requestDate;
     String petName;
     String petImageURL;
+    String municity;
     Boolean requestRescue;
     Boolean Rescued;
 
     public RescueModel() {
     }
 
-    public RescueModel(String personName, String personAddress, String uidRequest, String phoneContact1, String phoneContact2, String visitDate, String requestDate, String petName, String petImageURL, Boolean requestRescue, Boolean rescued) {
+    public RescueModel(String personName, String personAddress, String uidRequest, String phoneContact1, String phoneContact2, String visitDate, String requestDate, String petName, String petImageURL, String municity, Boolean requestRescue, Boolean rescued) {
         this.personName = personName;
         this.personAddress = personAddress;
         this.uidRequest = uidRequest;
@@ -27,6 +28,7 @@ public class RescueModel {
         this.requestDate = requestDate;
         this.petName = petName;
         this.petImageURL = petImageURL;
+        this.municity = municity;
         this.requestRescue = requestRescue;
         Rescued = rescued;
     }
@@ -102,6 +104,10 @@ public class RescueModel {
     public void setPetImageURL(String petImageURL) {
         this.petImageURL = petImageURL;
     }
+
+    public String getMunicity() { return municity; }
+
+    public void setMunicity(String municity) { this.municity = municity; }
 
     public Boolean getRequestRescue() {
         return requestRescue;

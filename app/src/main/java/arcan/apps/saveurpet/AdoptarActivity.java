@@ -14,9 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
@@ -37,7 +40,7 @@ public class AdoptarActivity extends AppCompatActivity {
     TextView adoptTitle;
     ImageView adoptImage;
     MaterialButton adopt, adoptDateButton;
-    String petName, petImageURL, uN, uA, uP;
+    String petName, petImageURL, uN, uA, uP, municity;
     FirebaseAuth firebaseAuth;
     String uid;
     TextInputLayout namePerson, personAddress, phone1, phone2, adoptDate;
@@ -58,7 +61,6 @@ public class AdoptarActivity extends AppCompatActivity {
     }
 
     private void loadInstances(final String uid) {
-        final DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         adopt = findViewById(R.id.AdoptPet);
         namePerson = findViewById(R.id.personNameInputLayout);
         personAddress = findViewById(R.id.addressInputLayout);
@@ -108,21 +110,17 @@ public class AdoptarActivity extends AppCompatActivity {
                 ph1 = phone1.getEditText().getText().toString();
                 ph2 = phone2.getEditText().getText().toString();
                 Date = adoptDate.getEditText().getText().toString();
-                AdoptModel AdoptForm = new AdoptModel(name, address, AdoptarActivity.this.uid, ph1, ph2, Date, Date, petName, petImageURL, true, false);
+                AdoptModel AdoptForm = new AdoptModel(name, address, AdoptarActivity.this.uid, ph1, ph2, Date, Date, petName, petImageURL, municity, true, false);
 
                 if (name.isEmpty() && address.isEmpty() && ph1.isEmpty() && ph2.isEmpty() && Date.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Dejaste algún campo vacío", Toast.LENGTH_SHORT).show();
                 }
-                else{
-                    db.child(getString(R.string.petAdopted_db)).child(petName).setValue(AdoptForm).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            db.collection(getString(R.string.petcollection_db)).document(petName).update("nonRequested", true);
-                            db.collection(getString(R.string.petcollection_db)).document(petName).update("requestAdoption", true);
-                            successfulRequest();
-                        }
-                    });
+                else {
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection(getString(R.string.petAdopted_db)).document(petName).set(AdoptForm);
+                    db.collection(getString(R.string.petcollection_db)).document(petName).update("nonRequested", true);
+                    db.collection(getString(R.string.petcollection_db)).document(petName).update("requestAdoption", true);
+                    successfulRequest();
                 }
             }
         });
@@ -130,8 +128,8 @@ public class AdoptarActivity extends AppCompatActivity {
 
     private void successfulRequest() {
         new MaterialAlertDialogBuilder(this)
-                .setTitle(getString(R.string.Successful_register_pet_title))
-                .setMessage(getString(R.string.Successful_register_message))
+                .setTitle("Gracias!")
+                .setMessage(getString(R.string.Successful_message))
                 .setPositiveButton(getString(R.string.Ok_value), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -148,5 +146,6 @@ public class AdoptarActivity extends AppCompatActivity {
         uA = bundle.getString("userAddress");
         uN = bundle.getString("userName");
         uP = bundle.getString("userPhone");
+        municity = bundle.getString("municity");
     }
 }

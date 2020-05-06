@@ -2,22 +2,24 @@ package arcan.apps.saveurpet.models;
 
 public class RipModel {
 
-    private String petName;
-    private String petImageURL;
     private String adoptBy;
-    private String rescuedBy;
     private String adoptDate;
-    private String rescueDate;
-    private String visitDate;
-    private Long entryDate;
-    private Long deathDate;
     private Boolean adopted;
-    private Boolean rescued;
+    private Long entryDate;
+    private String municity;
+    private Boolean NonRequested;
+    private String petImageURL;
+    private String petName;
     private Boolean requestAdoption;
     private Boolean requestRescue;
-    private Boolean NonRequested;
+    private String rescueDate;
+    private Boolean rescued;
+    private Long deathDate;
+    private String rescuedBy;
+    private String visitDate;
 
-    public RipModel(String petName, String petImageURL, String adoptBy, String rescuedBy, String adoptDate, String rescueDate, String visitDate, Long entryDate, Long deathDate, Boolean adopted, Boolean rescued, Boolean requestAdoption, Boolean requestRescue, Boolean nonRequested) {
+
+    public RipModel(String petName, String petImageURL, String adoptBy, String rescuedBy, String adoptDate, String rescueDate, String visitDate, String municity, Long entryDate, Long deathDate, Boolean adopted, Boolean rescued, Boolean requestAdoption, Boolean requestRescue, Boolean nonRequested) {
         this.petName = petName;
         this.petImageURL = petImageURL;
         this.adoptBy = adoptBy;
@@ -25,6 +27,7 @@ public class RipModel {
         this.adoptDate = adoptDate;
         this.rescueDate = rescueDate;
         this.visitDate = visitDate;
+        this.municity = municity;
         this.entryDate = entryDate;
         this.deathDate = deathDate;
         this.adopted = adopted;
@@ -92,6 +95,10 @@ public class RipModel {
     public void setVisitDate(String visitDate) {
         this.visitDate = visitDate;
     }
+
+    public String getMunicity() { return municity; }
+
+    public void setMunicity(String municity) { this.municity = municity; }
 
     public Long getEntryDate() {
         return entryDate;

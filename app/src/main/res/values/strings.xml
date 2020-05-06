@@ -18,6 +18,7 @@
     <string name="petRescued_db">requestRescuePet</string>
     <string name="NonAoR">NonAdoptedORRescued</string>
     <string name="complaints_db">Complaints</string>
+    <string name="counters">counters</string>
 
     <!-- Values -->
     <string name="Ok_value">Ok</string>
@@ -54,6 +55,7 @@
     <string name="error_upload_pet">Error al subir el registro</string>
     <string name="Successful_register_pet_title">Registro éxitoso!</string>
     <string name="Successful_register_message">El registro se cargó correctamente a la base de datos!</string>
+    <string name="Successful_message">Gracias por ser un héroe. Solicitamos esta información para comenzar el proceso de adopción lo más pronto posible. Tome en cuenta que si el proceso de adopción no es exitoso el Pet será trasladado a la pestaña RIP.</string>
     <string name="Adoption_title_button">Adoptar</string>
     <string name="Rescue_title_button">Rescatar</string>
     <string name="adoptPet_title_header">Proceso de adopción de mascota</string>
@@ -84,7 +86,7 @@
 		Ningun Pet en esta vida merece algo así.
 		Desde el fondo de nuestros corazones… SIEMPRE los recordaremos.
     </string>
-<string name="adopcion_text">Lamentamos tener en custodia a su Pet.
+    <string name="adopcion_text">Lamentamos tener en custodia a su Pet.
 Solicitamos esta información para comenzar el proceso de rescate lo más pronto posible.
 Tome en cuenta que si el proceso de adopción no es exitoso el Pet será trasladado a la pestaña RIP.
 </string>
@@ -105,6 +107,16 @@ Tome en cuenta que si el proceso de adopción no es exitoso el Pet será traslad
     <string name="gallery_Photo">Escoger una imagen de la galería</string>
     <string name="pick_image_intent">1</string>
     <string name="spinner">Seleccionar municipio</string>
+    <string name="title_activity_statistic">StatisticActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="statistics_title">Estadísticas</string>
 
 
 </resources>

@@ -46,6 +46,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -61,6 +62,8 @@ import java.util.Date;
 import arcan.apps.saveurpet.ComplaintActivity;
 import arcan.apps.saveurpet.R;
 import arcan.apps.saveurpet.models.ComplaintModel;
+
+import static com.google.firebase.firestore.FirebaseFirestore.getInstance;
 
 public class DenunciasFragment extends Fragment implements AdapterView.OnItemSelectedListener  {
     private int PICK_CODE = 1000;
@@ -188,13 +191,13 @@ public class DenunciasFragment extends Fragment implements AdapterView.OnItemSel
                     accept.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                           approveComplaint(model.getId());
+                           approveComplaint(model.getId(), model.getMunicity());
                         }
                     });
                     deny.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            deleteComplaint(model.getId());
+                            deleteComplaint(model.getId(), model.getMunicity());
                         }
                     });
                 }
@@ -215,14 +218,26 @@ public class DenunciasFragment extends Fragment implements AdapterView.OnItemSel
         return rootView;
     }
 
-    private void approveComplaint(String id) {
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        db.child("Complaints").child(id).child("visible").setValue(true);
+    private void approveComplaint(String id, String municity) {
+        DatabaseReference dbn = FirebaseDatabase.getInstance().getReference();
+        dbn.child("Complaints").child(id).child("visible").setValue(true);
+        FirebaseFirestore db = getInstance();
+        if (municity == "Seleccionar municipio"){
+            db.collection(getString(R.string.counters)).document("General").update("approvedComplaints", 1);
+        } else{
+            db.collection(getString(R.string.counters)).document(municity).update("approvedComplaints", 1);
+        }
     }
 
-    private void deleteComplaint(String id) {
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        db.child("Complaints").child(id).removeValue();
+    private void deleteComplaint(String id, String municity) {
+        DatabaseReference dbn = FirebaseDatabase.getInstance().getReference();
+        dbn.child("Complaints").child(id).removeValue();
+        FirebaseFirestore db = getInstance();
+        if (municity == "Seleccionar municipio"){
+            db.collection(getString(R.string.counters)).document("General").update("rejectedComplaints", 1);
+        } else{
+            db.collection(getString(R.string.counters)).document(municity).update("rejectedComplaints", 1);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

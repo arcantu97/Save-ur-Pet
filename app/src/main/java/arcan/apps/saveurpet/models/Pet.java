@@ -9,6 +9,7 @@ public class Pet {
     private String adoptDate;
     private String rescueDate;
     private String visitDate;
+    private String municity;
     private Long entryDate;
     private Long deathDate;
     private Boolean adopted;
@@ -21,7 +22,7 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(String petName, String petImageURL, String adoptBy, String rescuedBy, String adoptDate, String rescueDate, String visitDate, Long entryDate, Long deathDate, Boolean adopted, Boolean rescued, Boolean requestAdoption, Boolean requestRescue, Boolean nonRequested) {
+    public Pet(String petName, String petImageURL, String adoptBy, String rescuedBy, String adoptDate, String rescueDate, String visitDate, String municity, Long entryDate, Long deathDate, Boolean adopted, Boolean rescued, Boolean requestAdoption, Boolean requestRescue, Boolean nonRequested) {
         this.petName = petName;
         this.petImageURL = petImageURL;
         this.adoptBy = adoptBy;
@@ -29,6 +30,7 @@ public class Pet {
         this.adoptDate = adoptDate;
         this.rescueDate = rescueDate;
         this.visitDate = visitDate;
+        this.municity = municity;
         this.entryDate = entryDate;
         this.deathDate = deathDate;
         this.adopted = adopted;
@@ -38,9 +40,7 @@ public class Pet {
         NonRequested = nonRequested;
     }
 
-    public String getPetName() {
-        return petName;
-    }
+    public String getPetName() { return petName; }
 
     public void setPetName(String petName) {
         this.petName = petName;
@@ -101,6 +101,10 @@ public class Pet {
     public void setEntryDate(Long entryDate) {
         this.entryDate = entryDate;
     }
+
+    public String getMunicity() { return municity; }
+
+    public void setMunicity(String municity) { this.municity = municity; }
 
     public Long getDeathDate() {
         return deathDate;

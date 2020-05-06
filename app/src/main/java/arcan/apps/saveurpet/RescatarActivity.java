@@ -34,7 +34,7 @@ public class RescatarActivity extends AppCompatActivity {
     TextView rescueTitle;
     ImageView rescueImage;
     MaterialButton rescue, rescueDateButton;
-    String petName, petImageURL, uN, uA, uP;
+    String petName, petImageURL, uN, uA, uP, municity;
     FirebaseAuth firebaseAuth;
     String uid;
     TextInputLayout namePerson, personAddress, phone1, phone2, rescueDate;
@@ -95,7 +95,7 @@ public class RescatarActivity extends AppCompatActivity {
         personAddress.getEditText().setText(uA);
         phone1.getEditText().setText(uP);
 
-        final DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+
         rescue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,21 +104,17 @@ public class RescatarActivity extends AppCompatActivity {
                 ph1 = phone1.getEditText().getText().toString();
                 ph2 = phone2.getEditText().getText().toString();
                 Date = rescueDate.getEditText().getText().toString();
-                RescueModel RescueForm = new RescueModel(name, address, RescatarActivity.this.uid, ph1, ph2, Date, Date, petName, petImageURL, true, false);
+                RescueModel RescueForm = new RescueModel(name, address, RescatarActivity.this.uid, ph1, ph2, Date, Date, petName, petImageURL, municity, true, false);
 
                 if (name.isEmpty() && address.isEmpty() && ph1.isEmpty() && ph2.isEmpty() && Date.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Dejaste algún campo vacío", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    db.child(getString(R.string.petRescued_db)).child(petName).setValue(RescueForm).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            db.collection(getString(R.string.petcollection_db)).document(petName).update("nonRequested", true);
-                            db.collection(getString(R.string.petcollection_db)).document(petName).update("requestRescue", true);
-                            successfulRequest();
-                        }
-                    });
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection(getString(R.string.petRescued_db)).document(petName).set(RescueForm);
+                    db.collection(getString(R.string.petcollection_db)).document(petName).update("nonRequested", true);
+                    db.collection(getString(R.string.petcollection_db)).document(petName).update("requestRescue", true);
+                    successfulRequest();
                 }
             }
         });
@@ -144,5 +140,6 @@ public class RescatarActivity extends AppCompatActivity {
         uA = bundle.getString("userAddress");
         uN = bundle.getString("userName");
         uP = bundle.getString("userPhone");
+        municity = bundle.getString("municity");
     }
 }

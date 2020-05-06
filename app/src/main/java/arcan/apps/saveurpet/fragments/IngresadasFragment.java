@@ -37,6 +37,7 @@ import arcan.apps.saveurpet.MainActivity;
 import arcan.apps.saveurpet.R;
 import arcan.apps.saveurpet.RegisterActivity;
 import arcan.apps.saveurpet.RescatarActivity;
+import arcan.apps.saveurpet.StatisticsActivity;
 import arcan.apps.saveurpet.holders.CardViewHolder;
 import arcan.apps.saveurpet.models.Pet;
 
@@ -44,7 +45,7 @@ import static com.google.firebase.firestore.FirebaseFirestore.getInstance;
 
 
 public class IngresadasFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-    FloatingActionButton fab;
+    FloatingActionButton fab, fab2;
     ArrayAdapter<CharSequence> adapterCustom;
     Spinner spinner;
     String stateSelectedBySpinner;
@@ -96,16 +97,30 @@ public class IngresadasFragment extends Fragment implements AdapterView.OnItemSe
         recyclerView.setLayoutManager(gridLayoutManager);
 
         fab = rootView.findViewById(R.id.floatingActionButton);
+        fab2 = rootView.findViewById(R.id.floatingActionButton2);
         if (adminPermission == 1){
             fab.setVisibility(View.VISIBLE);
+            fab2.setVisibility(View.VISIBLE);
+            
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     openForm();
                 }
             });
+            fab2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openStatistics();
+                }
+            });
         }
         getInitialData();
+    }
+
+    private void openStatistics() {
+        Intent nextActivity = new Intent(getActivity(), StatisticsActivity.class);
+        startActivity(nextActivity);
     }
 
     private void getInitialData() {
@@ -162,14 +177,14 @@ public class IngresadasFragment extends Fragment implements AdapterView.OnItemSe
                 holder.adoptPet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Adopt(model.getPetName(), model.getPetImageURL());
+                        Adopt(model.getPetName(), model.getPetImageURL(), model.getMunicity());
                     }
                 });
 
                 holder.rescuePet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Rescue(model.getPetName(), model.getPetImageURL());
+                        Rescue(model.getPetName(), model.getPetImageURL(), model.getMunicity());
                     }
                 });
             }
@@ -192,6 +207,8 @@ public class IngresadasFragment extends Fragment implements AdapterView.OnItemSe
 
                     FirebaseFirestore.getInstance().collection(getString(R.string.NonAoR))
                             .document(model.getPetName()).set(model);
+
+                    FirebaseFirestore.getInstance().collection(getString(R.string.NonAoR)).document(model.getPetName()).update("nonRequested", true);
                 }
             }.start();
 
@@ -213,23 +230,25 @@ public class IngresadasFragment extends Fragment implements AdapterView.OnItemSe
         super.onStop();
         adapter.stopListening();
     }
-    private void Adopt(String petName, String petImageURL) {
+    private void Adopt(String petName, String petImageURL, String municity) {
         Intent intent = new Intent(getActivity(), AdoptarActivity.class);
         intent.putExtra("petName", petName);
         intent.putExtra("petImageURL", petImageURL);
         intent.putExtra("userName", name);
         intent.putExtra("userAddress", address);
         intent.putExtra("userPhone", phone1);
+        intent.putExtra("municity", municity);
         startActivity(intent);
     }
 
-    private void Rescue(String petName, String petImageURL) {
+    private void Rescue(String petName, String petImageURL, String municity) {
         Intent intent = new Intent(getActivity(), RescatarActivity.class);
         intent.putExtra("petName", petName);
         intent.putExtra("petImageURL", petImageURL);
         intent.putExtra("userName", name);
         intent.putExtra("userAddress", address);
         intent.putExtra("userPhone", phone1);
+        intent.putExtra("municity", municity);
         startActivity(intent);
     }
 

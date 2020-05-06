@@ -12,12 +12,13 @@ public class AdoptModel {
     String requestDate;
     String petName;
     String petImageURL;
+    String municity;
     Boolean requestAdoption;
     Boolean Adopted;
 
     public AdoptModel(){}
 
-    public AdoptModel(String personName, String personAddress, String uidRequest, String phoneContact1, String phoneContact2, String visitDate, String requestDate, String petName, String petImageURL, Boolean requestAdoption, Boolean adopted) {
+    public AdoptModel(String personName, String personAddress, String uidRequest, String phoneContact1, String phoneContact2, String visitDate, String requestDate, String petName, String petImageURL, String municity, Boolean requestAdoption, Boolean adopted) {
         this.personName = personName;
         this.personAddress = personAddress;
         this.uidRequest = uidRequest;
@@ -27,6 +28,7 @@ public class AdoptModel {
         this.requestDate = requestDate;
         this.petName = petName;
         this.petImageURL = petImageURL;
+        this.municity = municity;
         this.requestAdoption = requestAdoption;
         Adopted = adopted;
     }
@@ -101,11 +103,13 @@ public class AdoptModel {
         this.petImageURL = petImageURL;
     }
 
+    public String getMunicity() { return municity; }
+
+    public void setMunicity(String municity) { this.municity = municity; }
+
     public Boolean getRequestAdoption() { return requestAdoption; }
 
-    public void setRequestAdoption(Boolean requestAdoption) {
-        this.requestAdoption = requestAdoption;
-    }
+    public void setRequestAdoption(Boolean requestAdoption) { this.requestAdoption = requestAdoption; }
 
     public Boolean getAdopted() {
         return Adopted;

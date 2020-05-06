@@ -1,10 +1,11 @@
 package arcan.apps.saveurpet
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import arcan.apps.saveurpet.fragments.*
@@ -21,7 +22,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity() : AppCompatActivity() {
 
     var firebaseAuth: FirebaseAuth? = null
+    private var adminPermission: Long? = null
 
+    @SuppressLint("RestrictedApi")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         retrievePermission()
@@ -30,6 +33,8 @@ class MainActivity() : AppCompatActivity() {
         retrievePhone1()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val sharedPref = getActivity(this)!!.getPreferences(Context.MODE_PRIVATE)
+
         logoutBtn.setOnClickListener {
             logout()
         }
@@ -187,6 +192,7 @@ class MainActivity() : AppCompatActivity() {
                 })
         }
     }
+
 
     fun logout() {
         MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
