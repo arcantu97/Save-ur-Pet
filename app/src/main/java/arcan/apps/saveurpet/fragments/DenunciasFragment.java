@@ -58,6 +58,8 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import arcan.apps.saveurpet.ComplaintActivity;
 import arcan.apps.saveurpet.R;
@@ -222,10 +224,22 @@ public class DenunciasFragment extends Fragment implements AdapterView.OnItemSel
         DatabaseReference dbn = FirebaseDatabase.getInstance().getReference();
         dbn.child("Complaints").child(id).child("visible").setValue(true);
         FirebaseFirestore db = getInstance();
+        Date date =  Calendar.getInstance().getTime();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.pattern_date));
+        final String formattedDate = formatter.format(date);
         if (municity == "Seleccionar municipio"){
-            db.collection(getString(R.string.counters)).document("General").update("approvedComplaints", 1);
+            Map<String, Object> approveObject = new HashMap<>();
+            approveObject.put("municity", "General");
+            approveObject.put("date", formattedDate);
+            approveObject.put("type", "complaint/approve");
+            db.collection(getString(R.string.counters)).document().set(approveObject);
         } else{
-            db.collection(getString(R.string.counters)).document(municity).update("approvedComplaints", 1);
+            Map<String, Object> approveObject = new HashMap<>();
+            approveObject.put("municity", municity);
+            approveObject.put("date", formattedDate);
+            approveObject.put("type", "complaint/approve");
+            db.collection(getString(R.string.counters)).document().set(approveObject);
         }
     }
 
@@ -233,10 +247,22 @@ public class DenunciasFragment extends Fragment implements AdapterView.OnItemSel
         DatabaseReference dbn = FirebaseDatabase.getInstance().getReference();
         dbn.child("Complaints").child(id).removeValue();
         FirebaseFirestore db = getInstance();
+        Date date =  Calendar.getInstance().getTime();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.pattern_date));
+        final String formattedDate = formatter.format(date);
         if (municity == "Seleccionar municipio"){
-            db.collection(getString(R.string.counters)).document("General").update("rejectedComplaints", 1);
+            Map<String, Object> rejectObject = new HashMap<>();
+            rejectObject.put("municity", "General");
+            rejectObject.put("date", formattedDate);
+            rejectObject.put("type", "complaint/reject");
+            db.collection(getString(R.string.counters)).document().set(rejectObject);
         } else{
-            db.collection(getString(R.string.counters)).document(municity).update("rejectedComplaints", 1);
+            Map<String, Object> rejectObject = new HashMap<>();
+            rejectObject.put("municity", municity);
+            rejectObject.put("date", formattedDate);
+            rejectObject.put("type", "complaint/reject");
+            db.collection(getString(R.string.counters)).document().set(rejectObject);
         }
     }
 

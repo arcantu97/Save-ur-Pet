@@ -37,6 +37,8 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import arcan.apps.saveurpet.R;
 import arcan.apps.saveurpet.holders.RipCardViewHolder;
@@ -146,7 +148,7 @@ public class RescatadasFragment extends Fragment {
         return rootView;
     }
 
-    private void approveRequestPet(final String personName, final String petName, String municity) {
+    private void approveRequestPet(final String personName, final String petName, final String municity) {
         Date date =  Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.pattern_date));
@@ -163,6 +165,19 @@ public class RescatadasFragment extends Fragment {
                         db.collection(getString(R.string.petcollection_db)).document(petName).update("rescueDate", formattedDate);
                         db.collection(getString(R.string.petRescued_db)).document(petName).update("rescued", true);
                         db.collection(getString(R.string.petRescued_db)).document(petName).update("requestRescue", true);
+                        if (municity == "Seleccionar municipio"){
+                            Map<String, Object> approveObject = new HashMap<>();
+                            approveObject.put("municity", "General");
+                            approveObject.put("date", formattedDate);
+                            approveObject.put("type", "rescue/approve");
+                            db.collection(getString(R.string.counters)).document().set(approveObject);
+                        } else{
+                            Map<String, Object> approveObject = new HashMap<>();
+                            approveObject.put("municity", municity);
+                            approveObject.put("date", formattedDate);
+                            approveObject.put("type", "rescue/approve");
+                            db.collection(getString(R.string.counters)).document().set(approveObject);
+                        }
                     }
                 })
                 .setNegativeButton("Omitir", new DialogInterface.OnClickListener() {
@@ -180,6 +195,10 @@ public class RescatadasFragment extends Fragment {
                 .setPositiveButton("Rechazar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Date date =  Calendar.getInstance().getTime();
+                        @SuppressLint("SimpleDateFormat")
+                        SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.pattern_date));
+                        final String formattedDate = formatter.format(date);
                         FirebaseFirestore db = getInstance();
                         db.collection(getString(R.string.petRescued_db)).document(model.getPetName()).delete();
                         db.collection(getString(R.string.petcollection_db)).document(model.getPetName()).update("requestRescued", false);
@@ -188,9 +207,17 @@ public class RescatadasFragment extends Fragment {
                         db.collection(getString(R.string.petcollection_db)).document(model.getPetName()).update("rescuedBy", "");
                         db.collection(getString(R.string.petcollection_db)).document(model.getPetName()).update("rescuedDate", "");
                         if (municity == "Seleccionar municipio"){
-                            db.collection(getString(R.string.counters)).document("General").update("rejectedRescues", 1);
+                            Map<String, Object> rejectObject = new HashMap<>();
+                            rejectObject.put("municity", "General");
+                            rejectObject.put("date", formattedDate);
+                            rejectObject.put("type", "rescue/reject");
+                            db.collection(getString(R.string.counters)).document().set(rejectObject);
                         } else{
-                            db.collection(getString(R.string.counters)).document(municity).update("rejectedRescues", 1);
+                            Map<String, Object> rejectObject = new HashMap<>();
+                            rejectObject.put("municity", municity);
+                            rejectObject.put("date", formattedDate);
+                            rejectObject.put("type", "rescue/reject");
+                            db.collection(getString(R.string.counters)).document().set(rejectObject);
                         }
 
                     }

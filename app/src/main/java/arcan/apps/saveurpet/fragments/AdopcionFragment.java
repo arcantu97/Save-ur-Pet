@@ -43,6 +43,8 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import arcan.apps.saveurpet.R;
 import arcan.apps.saveurpet.holders.CardViewHolder;
@@ -165,6 +167,10 @@ public class AdopcionFragment extends Fragment {
                 .setPositiveButton("Rechazar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Date date =  Calendar.getInstance().getTime();
+                        @SuppressLint("SimpleDateFormat")
+                        SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.pattern_date));
+                        final String formattedDate = formatter.format(date);
                         FirebaseFirestore db = getInstance();
                         db.collection(getString(R.string.petAdopted_db)).document(model.getPetName()).delete();
                         db.collection(getString(R.string.petcollection_db)).document(model.getPetName()).update("requestAdoption", false);
@@ -174,9 +180,17 @@ public class AdopcionFragment extends Fragment {
                         db.collection(getString(R.string.petcollection_db)).document(model.getPetName()).update("adoptDate", "");
                         db.collection(getString(R.string.counters)).document("Adopted").update("rejected", 1);
                         if (municity == "Seleccionar municipio"){
-                            db.collection(getString(R.string.counters)).document("General").update("rejectedAdoptions", 1);
+                            Map<String, Object> rejectObject = new HashMap<>();
+                            rejectObject.put("municity", "General");
+                            rejectObject.put("date", formattedDate);
+                            rejectObject.put("type", "adoption/reject");
+                            db.collection(getString(R.string.counters)).document().set(rejectObject);
                         } else{
-                            db.collection(getString(R.string.counters)).document(municity).update("rejectedAdoptions", 1);
+                            Map<String, Object> rejectObject = new HashMap<>();
+                            rejectObject.put("municity", municity);
+                            rejectObject.put("date", formattedDate);
+                            rejectObject.put("type", "adoption/reject");
+                            db.collection(getString(R.string.counters)).document().set(rejectObject);
                         }
                     }
                 })
@@ -206,9 +220,17 @@ public class AdopcionFragment extends Fragment {
                         db.collection(getString(R.string.petAdopted_db)).document(petName).update("adopted", true);
                         db.collection(getString(R.string.petAdopted_db)).document(petName).update("requestAdoption", true);
                         if (municity == "Seleccionar municipio"){
-                            db.collection(getString(R.string.counters)).document("General").update("approvedAdoptions", 1);
+                            Map<String, Object> approveObject = new HashMap<>();
+                            approveObject.put("municity", "General");
+                            approveObject.put("date", formattedDate);
+                            approveObject.put("type", "adoption/approve");
+                            db.collection(getString(R.string.counters)).document().set(approveObject);
                         } else{
-                            db.collection(getString(R.string.counters)).document(municity).update("approvedAdoptions", 1);
+                            Map<String, Object> approveObject = new HashMap<>();
+                            approveObject.put("municity", municity);
+                            approveObject.put("date", formattedDate);
+                            approveObject.put("type", "adoption/approve");
+                            db.collection(getString(R.string.counters)).document().set(approveObject);
                         }
 
                     }
