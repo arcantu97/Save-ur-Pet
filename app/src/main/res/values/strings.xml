@@ -117,6 +117,15 @@ Tome en cuenta que si el proceso de adopción no es exitoso el Pet será traslad
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="statistics_title">Estadísticas</string>
+    <string name="fecha_de_inicio">Fecha de inicio</string>
+    <string name="fecha_de_fin">Fecha de fin</string>
+    <string name="download_title">Descargar PDF</string>
+    <string name="generate_pdf">Generar PDF</string>
+    <string name="pdf_title">Reporte informativo</string>
+    <string name="adopciones_title_pdf">Adopciones</string>
+    <string name="download">Download</string>
+    <string name="rescates_pdf_title">Rescates</string>
+    <string name="complaints_title_pdf">Denuncias</string>
 
 
 </resources>

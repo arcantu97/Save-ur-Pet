@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layoutPdf"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pdf_title"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:id="@+id/municityTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/periodTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/AdoptTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/adopciones_title_pdf"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"
+            android:layout_marginTop="40dp"/>
+
+        <TextView
+            android:id="@+id/aa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"/>
+
+        <TextView
+            android:id="@+id/ar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"/>
+
+        <TextView
+            android:id="@+id/at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"/>
+
+        <TextView
+            android:id="@+id/RescuedTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rescates_pdf_title"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/ra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"/>
+
+        <TextView
+            android:id="@+id/rr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"/>
+
+        <TextView
+            android:id="@+id/rt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"/>
+
+        <TextView
+            android:id="@+id/ComplaintsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/complaints_title_pdf"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/ca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"/>
+
+        <TextView
+            android:id="@+id/cr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"/>
+
+        <TextView
+            android:id="@+id/ct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:paddingStart="40dp"/>
+
+
+        <TextView
+            android:id="@+id/adminSign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:textColor="@color/gray"
+            android:paddingStart="170dp"
+            android:layout_marginTop="50dp"/>
+
+
+        <Button
+            android:id="@+id/downloadBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/download_title"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="#F12727"
+            tools:targetApi="lollipop" />
+    </LinearLayout>
+
+</LinearLayout>

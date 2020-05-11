@@ -227,7 +227,7 @@ public class DenunciasFragment extends Fragment implements AdapterView.OnItemSel
         Date date =  Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.pattern_date));
-        final String formattedDate = formatter.format(date);
+        String formattedDate = formatter.format(date);
         if (municity == "Seleccionar municipio"){
             Map<String, Object> approveObject = new HashMap<>();
             approveObject.put("municity", "General");
@@ -250,7 +250,7 @@ public class DenunciasFragment extends Fragment implements AdapterView.OnItemSel
         Date date =  Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.pattern_date));
-        final String formattedDate = formatter.format(date);
+        String formattedDate = formatter.format(date);
         if (municity == "Seleccionar municipio"){
             Map<String, Object> rejectObject = new HashMap<>();
             rejectObject.put("municity", "General");

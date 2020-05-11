@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        tools:targetApi="lollipop"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:targetApi="lollipop">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -52,5 +52,109 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:ignore="MissingConstraints" />
+
+
+
+    <Button
+        android:id="@+id/endDate"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:text="@string/fecha_de_fin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerMun"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/entryDate"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginRight="200dp"
+        android:text="@string/fecha_de_inicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerMun"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="88dp"
+        android:text="Fecha de inicio"
+        android:textAlignment="center"
+        android:textColor="#1279CC"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/entryDateText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerMun"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/entryDateText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="148dp"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="#1279CC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerMun"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Fecha de Fin"
+        android:textAlignment="center"
+        android:textColor="#1279CC"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/endDateText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entryDateText"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/endDateText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="68dp"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="#1279CC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entryDateText"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/downloadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/generate_pdf"
+        android:textSize="18sp"
+        android:backgroundTint="#D10F0F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/endDateText"
+        app:layout_constraintVertical_bias="0.575"
+        tools:targetApi="lollipop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

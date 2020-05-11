@@ -178,7 +178,6 @@ public class AdopcionFragment extends Fragment {
                         db.collection(getString(R.string.petcollection_db)).document(model.getPetName()).update("adopted", false);
                         db.collection(getString(R.string.petcollection_db)).document(model.getPetName()).update("adoptBy", "");
                         db.collection(getString(R.string.petcollection_db)).document(model.getPetName()).update("adoptDate", "");
-                        db.collection(getString(R.string.counters)).document("Adopted").update("rejected", 1);
                         if (municity == "Seleccionar municipio"){
                             Map<String, Object> rejectObject = new HashMap<>();
                             rejectObject.put("municity", "General");
