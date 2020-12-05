@@ -1,5 +1,6 @@
 package arcan.apps.saveurpet;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,25 +20,39 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firestore.v1.WriteResult;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import arcan.apps.saveurpet.models.Counter;
 
 public class StatisticsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
+    private static final String TAG = "Error";
     Spinner spinner;
     ArrayAdapter<CharSequence> adapterCustom;
     Button entryDate, endDate, download, results;
     TextView entryDateText, endDateText;
     String municity;
+    List<Counter> counters =new ArrayList<>();
     int counterAdoptedApprove = 0;
     int counterAdoptedReject = 0;
     int counterRescuedApprove = 0;
@@ -202,160 +217,98 @@ public class StatisticsActivity extends AppCompatActivity implements AdapterView
 
 
     private void downloadContents() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         if (municity.equals("Seleccionar municipio")){
-            String entryDate, endDate;
-            entryDate = entryDateText.getText().toString();
-            endDate = endDateText.getText().toString();
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            CollectionReference collectionRef = db.collection("counters");
-            Query queryAdoptionApprove = collectionRef.orderBy("date", Query.Direction.DESCENDING).whereEqualTo("type", "adoption/approve").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            queryAdoptionApprove.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterAdoptedApprove++;
+            db.collection("counters")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()){
+                                for (DocumentSnapshot document: task.getResult()){
+                                    Counter item = document.toObject(Counter.class);
+                                    if (isBetweenDate(item.getDate())){
+                                        switch (item.getType()){
+                                            case "rescue/approve":
+                                                counterRescuedApprove++;
+
+                                            case "rescue/reject":
+                                                counterRescuedReject++;
+
+                                            case "adoption/approve":
+                                                counterAdoptedApprove++;
+
+                                            case "adoption/reject":
+                                                counterAdoptedReject++;
+
+                                            case "complaint/approve":
+                                                counterComplaintApprove++;
+
+                                            case "complaint/reject":
+                                                counterComplaintReject++;
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    }
-                }
-            });
-            Log.i("Counter", String.valueOf(counterAdoptedApprove));
-            Query queryAdoptionReject = collectionRef.orderBy("date", Query.Direction.DESCENDING).whereEqualTo("type", "adoption/reject").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            queryAdoptionReject.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterAdoptedReject++;
-                        }
-                    }
-                }
-            });
-            Query queryRescueApprove = collectionRef.orderBy("date", Query.Direction.DESCENDING).whereEqualTo("type", "rescue/approve").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            queryRescueApprove.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterRescuedApprove++;
-                        }
-                    }
-                }
-            });
-            Query queryRescueReject = collectionRef.orderBy("date", Query.Direction.DESCENDING).whereEqualTo("type", "rescue/reject").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            queryRescueReject.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterRescuedReject++;
-                        }
-                    }
-                }
-            });
-            Query queryComplaintApprove = collectionRef.orderBy("date", Query.Direction.DESCENDING).whereEqualTo("type", "complaint/approve").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            queryComplaintApprove.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterComplaintApprove++;
-                        }
-                    }
-                }
-            });
-            Query queryComplaintReject = collectionRef.orderBy("date", Query.Direction.DESCENDING).whereEqualTo("type", "complaint/reject").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            queryComplaintReject.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterComplaintReject++;
-                        }
-                    }
-                }
-            });
-            downloadGeneralPdf();
+                    });
         }
+
         else{
-            String entryDate, endDate;
-            entryDate = entryDateText.getText().toString();
-            endDate = endDateText.getText().toString();
-            Query queryaAM = FirebaseFirestore.getInstance().collection("counters").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("municity", municity).whereEqualTo("type", "adoption/approve").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            queryaAM.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterAdoptedApprove++;
-                        }
-                    }
-                    Log.i("Counter", String.valueOf(counterAdoptedApprove));
-                }
-            });
+            db.collection("counters").whereEqualTo("municity", municity)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()){
+                                for (DocumentSnapshot document: task.getResult()){
+                                    Counter item = document.toObject(Counter.class);
+                                    if (isBetweenDate(item.getDate())){
+                                        switch (item.getType()){
+                                            case "rescue/approve":
+                                                counterRescuedApprove++;
 
-            Query queryaRM = FirebaseFirestore.getInstance().collection("counters").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("municity", municity).whereEqualTo("type", "adoption/reject").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            queryaRM.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterAdoptedReject++;
-                        }
-                    }
-                }
-            });
+                                            case "rescue/reject":
+                                                counterRescuedReject++;
 
-            Query queryrAM = FirebaseFirestore.getInstance().collection("counters").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("municity", municity).whereEqualTo("type", "rescue/approve").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            queryrAM.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterRescuedApprove++;
-                        }
-                    }
-                }
-            });
+                                            case "adoption/approve":
+                                                counterAdoptedApprove++;
 
-            Query queryrRM = FirebaseFirestore.getInstance().collection("counters").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("municity", municity).whereEqualTo("type", "rescue/reject").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            queryrRM.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterRescuedReject++;
-                        }
-                    }
-                }
-            });
+                                            case "adoption/reject":
+                                                counterAdoptedReject++;
 
-            Query querycAM = FirebaseFirestore.getInstance().collection("counters").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("municity", municity).whereEqualTo("type", "complaint/approve").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            querycAM.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterComplaintApprove++;
-                        }
-                    }
-                }
-            });
+                                            case "complaint/approve":
+                                                counterComplaintApprove++;
 
-            Query querycRM = FirebaseFirestore.getInstance().collection("counters").orderBy("date", Query.Direction.DESCENDING).whereEqualTo("municity", municity).whereEqualTo("type", "complaint/reject").whereGreaterThanOrEqualTo("date", entryDate).whereLessThanOrEqualTo("date", endDate);
-            querycRM.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                        if (doc.exists()){
-                            counterComplaintReject++;
+                                            case "complaint/reject":
+                                                counterComplaintReject++;
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    }
-                }
-            });
-
+                    });
         }
 
+
+    }
+
+    private boolean isBetweenDate(String date) {
+        String entry = entryDateText.getText().toString();
+        String end = endDateText.getText().toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+        try {
+            Date startDate = sdf.parse(entry);
+            Date endDate = sdf.parse(end);
+            Date d = sdf.parse(date);
+            String currDt = sdf.format(d);
+            if((d.after(startDate) && (d.before(endDate))) || (currDt.equals(sdf.format(startDate)) ||currDt.equals(sdf.format(endDate)))){
+               return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

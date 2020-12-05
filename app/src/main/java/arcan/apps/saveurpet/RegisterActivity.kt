@@ -59,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         savePet.setOnClickListener {
-            val storage = FirebaseStorage.getInstance("gs://save-ur-pet.appspot.comz")
+            val storage = FirebaseStorage.getInstance("gs://save-ur-pet.appspot.com")
             val storageReference = storage.reference
             petName = if (petInputLayout.editText?.text.toString().isEmpty()){
                 Instant.now().toEpochMilli().toString()

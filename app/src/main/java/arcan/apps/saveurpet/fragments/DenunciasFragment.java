@@ -268,7 +268,7 @@ public class DenunciasFragment extends Fragment implements AdapterView.OnItemSel
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void uploadComplaint() {
-        FirebaseStorage storage = FirebaseStorage.getInstance("gs://save-ur-pet.appspot.comm");
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://save-ur-pet.appspot.com");
         StorageReference reference = storage.getReference();
         final StorageReference refName = reference.child(Instant.now().toString());
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
