@@ -2,12 +2,16 @@ package arcan.apps.saveurpet;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -18,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -68,6 +73,8 @@ public class pdfActivity extends AppCompatActivity {
         getExtras();
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         adminName = sharedPref.getString("username", "Admin");
+
+
 
         if (municity.equals("General")){
             Municity.setVisibility(View.GONE);
@@ -169,7 +176,16 @@ public class pdfActivity extends AppCompatActivity {
         File filePath;
         filePath = new File(targetPdf);
         try {
-            document.writeTo(new FileOutputStream(filePath));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                //Verifica permisos para Android 6.0+
+                int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 225);
+                } else {
+                    document.writeTo(new FileOutputStream(filePath));
+                }
+            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
